@@ -2,6 +2,14 @@
   padding: 0 2rem;
 }
 
+.header{
+  text-align: center;
+}
+.body{
+  text-align: center;
+  color: rgb(236, 20, 20);
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
