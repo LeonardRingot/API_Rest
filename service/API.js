@@ -1,33 +1,29 @@
-import axios from "axios";
-export default function API()
-{
-    
-   const requetePost= axios.post({
-            method:'post',
-            url: 'http://localhost:5000/connexion',
-            data:{
-                email:'',
-                pwd:'',
-            }
-            
-        });
-     const requeteGet =    axios.get({
-            method:'get',
-            url: 'http://localhost:5000/users',
-            data:{
-                email:'',
-                pwd:'',
-                nom:'',
-                prenom:'',
-                pseudo:''
-                
-            }
-            
-        });
-
-    const API ={
-        
-       
-    }
-    
+import axios from "axios"; 
+export function requetePost(pseudo, nom, prenom, email, pwd){
+    var data = JSON.stringify({
+        "pseudo": pseudo,
+        "nom": nom,
+        "prenom": prenom,
+        "email": email,
+        "pwd": pwd
+      });
+    var config = {
+        method: 'post',
+        url: 'http://localhost:5000/api/users',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        data : data
+      };
+    return axios(config);
+}
+export function requeteGet(){
+    console.log("pass")
+    return axios.get({
+        method:'get',
+        url: 'http://localhost:5000/api/users',
+        data:{
+            email:'',
+            pwd:'',
+    }});
 }
