@@ -17,13 +17,31 @@ export function requetePost(pseudo, nom, prenom, email, pwd){
       };
     return axios(config);
 }
-export function requeteGet(){
-    console.log("pass")
-    return axios.get({
-        method:'get',
-        url: 'http://localhost:5000/api/users',
-        data:{
-            email:'',
-            pwd:'',
-    }});
+
+export function requetePostConnexion(pseudo, email, pwd){
+  var data = JSON.stringify({
+    "pseudo": pseudo,
+    "email": email,
+    "pwd": pwd
+  });
+  var configConnexion = {
+    method: 'post',
+    url: 'http://localhost:5000/api/auths/login',
+    headers: { 
+      'Content-Type': 'application/json'
+    },
+    data : data
+  };
+return axios(configConnexion);
+}
+
+export function requeteGetProfile(id){
+  var configGetId = {
+    method: 'get',
+    url: 'http://localhost:5000/api/users/' + id,
+    headers: { 
+      'Content-Type': 'application/json'
+    }
+  };
+return axios(configGetId);
 }

@@ -6,6 +6,7 @@ export default function inscription()
 {
   const router = useRouter()
     const [erreur, setErreur] = useState('');
+    const[IsOk, setIsOk] = useState('');
     const [InscriptionForm, setInscriptionForm]= useState({
       pseudo:'',
       nom:'',
@@ -27,7 +28,8 @@ export default function inscription()
         , InscriptionForm.prenom, InscriptionForm.email
         , InscriptionForm.pwd).then(response => {
           if(response.status == 201){
-            router.push('/dashboard');
+            //router.push('../profile/profile');
+            setIsOk('Compte crée');
           } else {
             setErreur('Adresse mail deja utilisée.');
           }
@@ -53,6 +55,7 @@ export default function inscription()
           <button value='submit' type="submit">Submit</button><br></br>
          </form>
          <p>{erreur}</p>
+         <p>{IsOk}</p>
      </div> 
    </div>
 );
