@@ -1,14 +1,53 @@
 
 .container {
   padding: 0 2rem;
+  background-color: #39494e;
 }
 
 .header{
   text-align: center;
+  
 }
 .body{
   text-align: center;
   color: rgb(236, 20, 20);
+}
+.formcontrolsubmit{
+  background: rgb(22, 60, 231);
+	border-color: transparent;
+	color:#fff;
+	font-size: 15px;
+	width: 200px;
+	letter-spacing: 2px;
+	height:50px;
+	margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+
+.myContainer
+{
+  text-align: center;
+  background-color: #39494e;
+  width: 100;
+  padding-top: 25px;
+}
+.myformConnexion
+{
+  background-color: 39494e;
+  
+ padding-top: 50px;
+}
+
+.formcontrol{
+  width: 300px;
+	background: transparent;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid black;
+	color: black;
+	font-size: 18px;
+	margin-bottom: 16px;
 }
 .myform{
   background-color: red;
@@ -20,6 +59,25 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   background-color: #0070f3;
 }
+.mybutton{
+  background-color: #4CAF50; /* Green */
+  border: 1px solid #4CAF50; /* Green */
+  padding: 15px  30px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+.mybutton2{
+  background-color: #4CAF50; /* Green */
+  border: 1px solid #4CAF50; /* Green */
+  padding: 15px  30px;
+  margin-left: 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
 
 .main {
   min-height: 100vh;

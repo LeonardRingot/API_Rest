@@ -8,7 +8,6 @@ export default function connexion()
   const [erreur, setErreur] = useState('');
   const[IsOk, setIsOk] = useState('');
   const [ConnexionForm, setConnexionform]= useState({
-   pseudo:'',
    email:'',
     pwd:''
   })
@@ -24,7 +23,7 @@ export default function connexion()
   {
     
     e.preventDefault()
-    API.requetePostConnexion( ConnexionForm.pseudo, ConnexionForm.email, ConnexionForm.pwd).then(response => {
+    API.requetePostConnexion( ConnexionForm.email, ConnexionForm.pwd).then(response => {
         if(response.status == 200){
           
           router.push({pathname: '../profile/profile', query: {id: response.data.data}});
@@ -38,20 +37,18 @@ export default function connexion()
       });
   }
 return (
-  <div>
+  <div className={styles.myContainer}>
     <h1>Formulaire de connexion</h1>
-    <form  onSubmit={ScriptFormConnexion} className={styles.myform} action="" method="post">
+    
+    <form className={styles.myformConnexion}  onSubmit={ScriptFormConnexion}  action="" method="post">
 
-    <label htmlFor='pseudo'>Pseudo:</label>
-      <input onChange={handleChange} type="text"  name="pseudo" /><br></br>
-
-      <label htmlFor='email'>email:</label>
-      <input onChange={handleChange} type="email"  name="email" /><br></br>
+      <label htmlFor='email'>Email:</label>
+      <input onChange={handleChange} type="email" className={styles.formcontrol} name="email" /><br></br>
 
       <label htmlFor='pwd'>Mot de passe:</label>
-      <input onChange={handleChange} type="password"  name="pwd" /><br></br>
+      <input onChange={handleChange} type="password" className={styles.formcontrol} name="pwd" /><br></br>
 
-      <button type="submit">Submit</button><br></br>
+      <input  value="Submit"className={styles.formcontrolsubmit} type="submit"/> <br></br>
       <p>{erreur}</p>
       <p>{IsOk}</p>
     </form>

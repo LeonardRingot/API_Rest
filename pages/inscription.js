@@ -38,21 +38,21 @@ export default function inscription()
       });
     }
      return (
-      <div>
+      <div className={styles.myContainer}>
      <h1>Formulaire d'Inscription</h1>
      <div>
-        <form className={styles.myform}  onSubmit={ScriptForm} action='' method="post">
+        <form className={styles.myformConnexion}  onSubmit={ScriptForm} action='' method="post">
           <label htmlFor='pseudo'>Pseudo:</label>
-          <input onChange={handleChange} type="text" name="pseudo" /><br></br>
+          <input onChange={handleChange} type="text" className={styles.formcontrol} name="pseudo" /><br></br>
           <label htmlFor='nom'>Nom:</label>
-          <input onChange={handleChange} type="text" name="nom" /><br></br>
+          <input onChange={handleChange} type="text" className={styles.formcontrol} name="nom" /><br></br>
           <label htmlFor='prenom'>Prenom:</label>
-          <input onChange={handleChange} type="text" name="prenom" /><br></br>
+          <input onChange={handleChange} type="text"  className={styles.formcontrol} name="prenom" /><br></br>
           <label htmlFor='email'>mail:</label>
-          <input onChange={handleChange} type="email" name="email" /><br></br>
+          <input onChange={handleChange} type="email" className={styles.formcontrol} name="email" /><br></br>
           <label htmlFor='pwd'>Mot de passe:</label>
-          <input onChange={handleChange} type="password" name="pwd" /><br></br>
-          <button value='submit' type="submit">Submit</button><br></br>
+          <input onChange={handleChange} type="password" className={styles.formcontrol} name="pwd" /><br></br>
+          <input  value="Submit"className={styles.formcontrolsubmit} type="submit"/> <br></br>
          </form>
          <p>{erreur}</p>
          <p>{IsOk}</p>

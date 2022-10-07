@@ -18,9 +18,8 @@ export function requetePost(pseudo, nom, prenom, email, pwd){
     return axios(config);
 }
 
-export function requetePostConnexion(pseudo, email, pwd){
+export function requetePostConnexion( email, pwd){
   var data = JSON.stringify({
-    "pseudo": pseudo,
     "email": email,
     "pwd": pwd
   });
@@ -44,4 +43,26 @@ export function requeteGetProfile(id){
     }
   };
 return axios(configGetId);
+}
+
+export function requeteUpdateProfil(pseudo, nom, prenom, email, pwd, bio, id){
+  
+  var data = JSON.stringify({
+      "pseudo": pseudo,
+      "nom": nom,
+      "prenom": prenom,
+      "email": email,
+      "pwd": pwd,
+      "bio": bio,
+     
+    });
+  var configUpdateProfile = {
+      method: 'put',
+      url: 'http://localhost:5000/api/users/' +id,
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+  return axios(configUpdateProfile);
 }
