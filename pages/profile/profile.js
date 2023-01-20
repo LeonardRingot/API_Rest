@@ -14,6 +14,7 @@ export default function profile() {
         API.requeteGetProfile(id)
         .then(response => {
           if(response.status == 200){
+            console.log(data)
             setConnectedUser(response.data.data);
           }
         })
