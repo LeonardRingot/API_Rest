@@ -1,11 +1,16 @@
 import { useCallback,useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styles from '../styles/Home.module.css'
+import {useCookies} from 'react-cookie'
 import * as API from '../service/API'
+import Box  from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import  TextField  from '@mui/material/TextField'
 export default function connexion() 
 {
   const router = useRouter()
   const [erreur, setErreur] = useState('');
+  const [cookie, setCookie, removeCookie] = useCookies(["user"]);
   const[IsOk, setIsOk] = useState('');
   const [ConnexionForm, setConnexionform]= useState({
    email:'',
@@ -19,39 +24,55 @@ export default function connexion()
     });
   }
   
-  const ScriptFormConnexion = (e) =>
-  {
-    
-    e.preventDefault()
-    API.requetePostConnexion( ConnexionForm.email, ConnexionForm.pwd).then(response => {
-        if(response.status == 200){
-          
-          router.push({pathname: '../profile/profile', query: {id: response.data.data}});
-          setIsOk('Connexion etablie');
-        } else {
-          setErreur('Champs incorrects.');
-          return res.status(400).send('Utilisateur introuvable')
-        }
-      }).catch(function(error){
-        console.log(error);
-      });
-  }
+  function ScriptFormConnexion  (event)
+    {
+      event.preventDefault()
+      const data = {
+        email:event.target.email.value,
+        pwd:event.target.pwd.value,
+      }
+      API.requetePostConnexion(data.email, data.pwd).then(response => {
+       
+          if(response.status == 200){    
+            console.log(response.data.id)      
+            router.push({pathname: '../profile/profile', query: {id: response.data.id}});
+            console.log(response.data.id)
+            setCookie("user", [response.data.accessToken, response.data.refreshToken, data.email], "/");
+            console.log("COOKIE CREATED");
+            console.log(response.data.accessToken)
+          } else {
+            return res.status(400).send('user introuvable')
+            
+          }
+        }).catch(function(error){
+          console.log(error);
+        });
+    }
 return (
-  <div className={styles.myContainer}>
-    <h1>Formulaire de connexion</h1>
-    
-    <form className={styles.myformConnexion}  onSubmit={ScriptFormConnexion}  action="" method="post">
-
-      <label htmlFor='email'>Email:</label>
-      <input onChange={handleChange} type="email" className={styles.formcontrol} name="email" /><br></br>
-
-      <label htmlFor='pwd'>Mot de passe:</label>
-      <input onChange={handleChange} type="password" className={styles.formcontrol} name="pwd" /><br></br>
-
-      <input  value="Submit"className={styles.formcontrolsubmit} type="submit"/> <br></br>
-      <p>{erreur}</p>
-      <p>{IsOk}</p>
-    </form>
-  </div>
+  <div className={styles.login}>
+  <Box component="form" noValidate  onSubmit={ScriptFormConnexion} method="post"  sx={{p: 2, width:'50%', textAlign:'center' ,display:'inline-block'}} >
+    <h1>Formulaire de Connexion</h1>
+    <TextField 
+          onChange={handleChange}
+          margin='normal'
+          fullWidth
+          required
+         id="email"
+         name="email"
+         label="Adress mail"
+          />
+          <TextField 
+          margin='normal'
+          onChange={handleChange}
+          required
+          fullWidth
+         id="pwd"
+         name="pwd"
+         type="password"
+         label="Mot de passe"
+          />
+          <Button type="submit" value="submit" >Envoyer</Button>
+    </Box>
+    </div>
 );
 }

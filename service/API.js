@@ -48,7 +48,7 @@ export function requeteGetProfile(id){
 return axios(configGetId);
 }
 
-export function requeteUpdateProfil(pseudo, nom, prenom, email, pwd, bio, id){
+export function requeteUpdateProfil(id,pseudo, nom, prenom, email, pwd,birthday, bio){
   
   var data = JSON.stringify({
     "pseudo": pseudo,

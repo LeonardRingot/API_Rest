@@ -10,7 +10,7 @@ export default function Accueil(){
     return(
         <>
         <div className={styles.img}>
-            <Image src="/simplon.png" width={500} height={500} quality={100}>
+            <Image src="/imagebizarre.jpeg" width={1000} height={500} quality={100}>
                 
             </Image>
             <div className={styles.text}>

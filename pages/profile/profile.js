@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import * as API from '../../service/API'
+import Box  from '@mui/material/Box'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import styles from '../../styles/Home.module.css'
+
+import {Button }from '@mui/material';
+import test from'../../public/test.jpg'
 
 export default function profile() {
     const router = useRouter()
@@ -14,7 +24,7 @@ export default function profile() {
         API.requeteGetProfile(id)
         .then(response => {
           if(response.status == 200){
-            console.log(data)
+            console.log(response.data)
             setConnectedUser(response.data.data);
           }
         })
@@ -22,33 +32,58 @@ export default function profile() {
       }
       fetchSomethingById()
     }, [id])
-    /*
-    useEffect(() => { 
-        //const user = users.find( users => users.id  )
-        //setConnectedUser(user)
-        console.log("useeffet " + id);
-
-    }, []);*/
+    
 
     const modifierprofil = () => {
-      router.push('/profile/modifierprofil')
+      router.push(`/profile/modifierprofil?id=${id}`)
   }
   return (
-    <> 
-    <h1>Profile</h1>
+    <>
+     <div className={styles.macarte}>
+    <h1>Mon profile</h1>
+
             {Connecteduser?
-                <>
-                    <ul>
-                        <li>pseudo : {Connecteduser.pseudo}</li>
-                        <li>nom: {Connecteduser.nom}</li>
-                        <li>prenom: {Connecteduser.prenom}</li>
-                        <li>email: {Connecteduser.email}</li>
-                        <li><p>Bio:</p> {Connecteduser.bio ? Connecteduser.bio : "'Vous n'avez pas de biographie, cliquez sur le bouton Modifier Profil pour ajouter une biographie'"}</li>
-                    </ul> 
-                    <button onClick={modifierprofil}>Modifier Profil</button> 
+                <><Box>
+                    <Card sx={{ maxWidth: 500,width:'50%', textAlign:'center' ,display:'inline-block' }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          src={require('../../public/test.jpg')}
+         
+          alt="mon image de profile"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Mes Infos personnelles
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Mon pseudo:{Connecteduser.pseudo}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Mon nom de famille:{Connecteduser.nom}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Mon Prenom:{Connecteduser.prenom}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Mon adresse mail:{Connecteduser.email}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Ma Biographie:{Connecteduser.bio ? Connecteduser.bio : "'Vous n'aveez pas de biographie'"}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <Button onClick={modifierprofil} >Modifier mon profile</Button>
+    </Card>
+        </Box>
+                    
+                    
                 </>
                 : ''
             }
+      </div>
     </>
+    
   )
 }

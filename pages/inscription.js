@@ -2,8 +2,9 @@ import React ,{ useEffect, useState } from 'react'
 import * as API from '../service/API'
 import { useRouter } from 'next/router'
 import styles from '../styles/Home.module.css'
-import {LocalizationProvider, MobileDatePicker} from "@mui/x-date-pickers"
+import {LocalizationProvider} from "@mui/x-date-pickers"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Unstable_DateField as DateField } from '@mui/x-date-pickers/DateField';
 import dayjs from 'dayjs';
 import 'dayjs/locale/es-us'
 import Box  from '@mui/material/Box'
@@ -115,14 +116,14 @@ export default function inscription()
        label="Mot de passe "
         />
         <LocalizationProvider  dateAdapter={AdapterDayjs}>
-          <MobileDatePicker
+          
+          <DateField
           label="birthday"
-          inputFormat='YYYY/MM/DD'
+          
           name="birthday"
-          type="date"
+          
           value={date}
           onChange={newDate => setDate(dayjs(newDate, "YYYY/MM/DD").format())}
-          renderInput={(props) => <TextField  {...props}  />}
           />
         </LocalizationProvider>
            <TextField 
